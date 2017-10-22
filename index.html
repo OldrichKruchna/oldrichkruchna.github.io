@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Welcome to Vue</title>
+  <title>Hacking Game</title>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/buefy"></script>
   <script src="./config.js"></script>
@@ -33,7 +33,7 @@
         <b-input value="123" type="text" v-model="password"></b-input>
       </b-field>
 
-      <button class="button is-primary" :disabled="similarinityIndex !== 1" v-on:click="login()">Přihlásit</button>
+      <button class="button is-primary" :disabled="similarinityIndex !== 1" v-on:click="login()">Login</button>
     </div>
   </div>
 
@@ -43,12 +43,12 @@
     new Vue({
       el: '#app',
       data: {
-        greeting: 'Vítej v hackovací hře',
+        greeting: 'Welcome in hacking game',
         people: window.people,
         password: '',
         matchPassword: window.people[0].password,
         selectedPerson: window.people[0],
-        similarityMessage: 'Zadej heslo.',
+        similarityMessage: 'Input password',
         similarinityIndex: 0
       },
       methods: {
@@ -59,9 +59,9 @@
         },
         login: function () {
           this.$dialog.alert({
-                    title: 'TAJNÉ! ' + this.selectedPerson.name,
+                    title: 'SECRET! ' + this.selectedPerson.name,
                     message: this.selectedPerson.secretInformation,
-                    confirmText: 'Zavřít'
+                    confirmText: 'Close'
           })
         }
       },
@@ -72,17 +72,17 @@
 
             this.similarinityIndex = similarinityIndex;
             if (similarinityIndex < 0.3 && similarinityIndex !== 0) {
-              this.similarityMessage = 'Samá voda, ještě se nad heslem zamysli.'
+              this.similarityMessage = 'Ah no, the password does not match at all so far';
             } else if (similarinityIndex >= 0.3 && similarinityIndex < 0.6) {
-              this.similarityMessage = 'Vypadá to, že jsi na správně cestě.'
+              this.similarityMessage = 'It seems that your are going right direction.'
             } else if (similarinityIndex >= 0.6 && similarinityIndex < 0.8) {
-              this.similarityMessage = 'Ano, velká část hesla je správně!'
+              this.similarityMessage = 'Yes, big part of the password is correct!'
             } else if (similarinityIndex >= 0.8 && similarinityIndex < 1) {
-              this.similarityMessage = 'Heslo je skoro správně! Ještě se zamysli a udělej nějakou malou změnu.'
+              this.similarityMessage = 'The password is almost correct! Just think a bit and do slight change.'
             } else if (similarinityIndex === 1) {
-              this.similarityMessage = 'Ano! Uhádl jsi heslo. Tak si přihlaš a zjisti tajnou informaci.'
+              this.similarityMessage = 'Yes! You made it. Now login and get the secret information.'
             } else {
-              this.similarityMessage = 'Zadej heslo.';
+              this.similarityMessage = 'Input password';
             }
           }
         },
